@@ -12,7 +12,7 @@ import ManageProduct from "./Components/ManageProduct/ManageProduct";
 
 function App() {
   return (
-    <div className="">
+    <div>
       <Router>
         <div>
           <nav>

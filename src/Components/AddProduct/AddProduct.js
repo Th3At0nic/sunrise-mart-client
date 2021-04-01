@@ -7,7 +7,6 @@ const AddProduct = () => {
   const [imageURL, setImageURL] = useState(null);
 
   const onSubmit = (data) => {
-    // console.log(data);
     const productData = {
       name: data.name,
       weight: data.weight,
@@ -17,7 +16,7 @@ const AddProduct = () => {
 
     // console.log(imageURL);
     const url = `http://localhost:5009/addProduct`;
-    console.log(productData);
+    // console.log(productData);
     fetch(url, {
       method: "POST",
       headers: {
@@ -25,7 +24,17 @@ const AddProduct = () => {
       },
       body: JSON.stringify(productData),
     }).then((res) => console.log("server side response", res));
+
+    clearFormInput();
   };
+
+  const clearFormInput = () => {
+    document.getElementById("name").value = "";
+    document.getElementById("weight").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("image").value = "";
+  };
+
   const handleImageUpload = (event) => {
     console.log(event.target.files[0]);
     const imageData = new FormData();
@@ -37,7 +46,7 @@ const AddProduct = () => {
       .then(function (response) {
         console.log(response.data.data.display_url);
         setImageURL(response.data.data.display_url);
-        console.log(imageURL);
+        // console.log(imageURL);
       })
       .catch(function (error) {
         console.log(error);
@@ -48,6 +57,7 @@ const AddProduct = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           className="mb-2"
+          id="name"
           name="name"
           defaultValue="your product name"
           placeholder="Product name"
@@ -56,6 +66,7 @@ const AddProduct = () => {
         <br />
         <input
           className="mb-2"
+          id="weight"
           name="weight"
           //   defaultValue="1-KG"
           placeholder="Quantity"
@@ -64,6 +75,7 @@ const AddProduct = () => {
         <br />
         <input
           className="mb-2"
+          id="price"
           name="price"
           //   defaultValue=""
           placeholder="Price"
@@ -73,6 +85,7 @@ const AddProduct = () => {
         <input
           className="mb-2"
           name="imageURL"
+          id="image"
           type="file"
           onChange={handleImageUpload}
         />{" "}
