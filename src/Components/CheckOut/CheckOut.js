@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 const CheckOut = () => {
   const { id } = useParams();
   const [success, setSuccess] = useState(false);
-  const email = "islammdrahatul@gmail.com";
+  const email = "sakibalhassan@gmail.com";
 
   const handleCheckout = () => {
     console.log(email, "Do checkout", id);
@@ -16,7 +16,7 @@ const CheckOut = () => {
       orderDate: new Date(),
     };
 
-    const url = `http://localhost:5009/addOrder`;
+    const url = `https://evening-harbor-99368.herokuapp.com/addOrder`;
     fetch(url, {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -62,22 +62,22 @@ const CheckOut = () => {
           </thead>
           <tbody>
             <tr>
-              <td className="text-left">Backpack</td>
-              <td className="text-center">1</td>
-              <td className="text-right">$1200</td>
+              <td className="text-left">Ruchi Chanachur</td>
+              <td className="text-center">1 Piece</td>
+              <td className="text-right">৳ 50</td>
             </tr>
 
             <tr>
-              <td className="text-left">Backpack</td>
-              <td className="text-center">1</td>
-              <td className="text-right">$1200</td>
+              <td className="text-left">Rupchanda Fortified Soybean Oil</td>
+              <td className="text-center">5 Liter</td>
+              <td className="text-right">৳ 700</td>
             </tr>
 
             <tr style={{ borderTop: "1px solid rgba(0,0,0,0.25)" }}>
               <td className="text-left" colSpan="2">
                 Total
               </td>
-              <td className="text-right">$1200</td>
+              <td className="text-right">৳ 750</td>
             </tr>
           </tbody>
         </table>

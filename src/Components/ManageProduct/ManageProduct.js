@@ -5,10 +5,21 @@ const ManageProduct = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5009/manageProducts")
+    fetch("https://evening-harbor-99368.herokuapp.com/manageProducts")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
+
+  const deleteProduct = (id) => {
+    console.log(id);
+    fetch(`http://localhost:3000/delete/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log("deleted successfully", result);
+      });
+  };
 
   return (
     <div>
@@ -21,7 +32,12 @@ const ManageProduct = () => {
               <td>{product.weight}</td>
               <td>৳ {product.price}</td>
               <td>
-                <button className="btn btn-danger ml-5">Delete</button>
+                <button
+                  onClick={() => deleteProduct(product._id)}
+                  className="btn btn-danger ml-5"
+                >
+                  Delete
+                </button>
               </td>
             </th>
           </Table>

@@ -15,7 +15,7 @@ const AddProduct = () => {
     };
 
     // console.log(imageURL);
-    const url = `http://localhost:5009/addProduct`;
+    const url = `https://evening-harbor-99368.herokuapp.com/addProduct`;
     // console.log(productData);
     fetch(url, {
       method: "POST",
