@@ -1,18 +1,37 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { UserContext } from "../../App";
+import ShowCheckoutProduct from "../ShowCheckoutProduct/ShowCheckoutProduct";
 // import "./Checkout.css";
 
 const CheckOut = () => {
   const { id } = useParams();
   const [success, setSuccess] = useState(false);
-  const email = "sakibalhassan@gmail.com";
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  //   const email = "sakibalhassan@gmail.com";
+
+  const [checkoutData, setCheckoutData] = useState({});
+  //Getting Data based on ID
+  useEffect(() => {
+    const url = `https://evening-harbor-99368.herokuapp.com/showProductById/${id}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          setCheckoutData(data);
+        }
+      });
+  }, [id]);
 
   const handleCheckout = () => {
-    console.log(email, "Do checkout", id);
-
     const orderInfo = {
-      email: email,
+      email: loggedInUser.email,
       productId: id,
+      totalPrice: checkoutData.price,
+      discount: 0,
+      quantity: 1,
+      deliveryCharge: 60,
       orderDate: new Date(),
     };
 
@@ -61,23 +80,14 @@ const CheckOut = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="text-left">Ruchi Chanachur</td>
-              <td className="text-center">1 Piece</td>
-              <td className="text-right">৳ 50</td>
-            </tr>
-
-            <tr>
-              <td className="text-left">Rupchanda Fortified Soybean Oil</td>
-              <td className="text-center">5 Liter</td>
-              <td className="text-right">৳ 700</td>
-            </tr>
-
+            <ShowCheckoutProduct
+              dataObject={checkoutData}
+            ></ShowCheckoutProduct>
             <tr style={{ borderTop: "1px solid rgba(0,0,0,0.25)" }}>
               <td className="text-left" colSpan="2">
                 Total
               </td>
-              <td className="text-right">৳ 750</td>
+              <td className="text-right">${checkoutData.price}</td>
             </tr>
           </tbody>
         </table>
