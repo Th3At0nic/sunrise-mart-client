@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { useState } from "react";
-import firebaseConfig from "../../configs/firebase.config";
 import { UserContext } from "../../App";
 import { useHistory, useLocation } from "react-router";
+import firebaseConfig from "../../configs/firebase.config";
 
 // firebase.initializeApp(firebaseConfig);
 if (firebase.apps.length === 0) {
@@ -13,6 +13,7 @@ if (firebase.apps.length === 0) {
 
 function Login() {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  console.log(loggedInUser);
   let history = useHistory();
   let location = useLocation();
 
